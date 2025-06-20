@@ -1,0 +1,22 @@
+{
+  "name": "windsurf-agent",
+  "version": "0.1.0",
+  "description": "A Windsurf agent template",
+  "entry_point": "src/main.py",
+  "memory": {
+    "enabled": true,
+    "persistence": true
+  },
+  "tools": {
+    "auto_discover": true,
+    "directory": "src/tools"
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  },
+  "security": {
+    "require_authentication": true,
+    "allowed_origins": ["https://app.windsurf.com"]
+  }
+}
