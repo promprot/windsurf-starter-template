@@ -1,5 +1,12 @@
 # Architecture Overview
 
+*Version: 1.0.0*  
+*Last Updated: 2025-06-20*  
+*Maintainer: Red Team*
+
+## Overview
+This document outlines the high-level architecture of the Windsurf Agent Starter Template, including its components, data flow, and security considerations.
+
 ## System Components
 
 ### 1. Core Agent
@@ -38,3 +45,18 @@ graph TD
 - Tools run in isolated environments
 - Memory persistence is configurable
 - API authentication is required
+
+## Changelog
+
+### [1.0.0] - 2025-06-20
+#### Added
+- Initial architecture documentation
+- System components overview
+- Data flow diagram
+- Security considerations
+
+#### Changed
+- Updated to follow new documentation standards
+
+#### Removed
+- N/A

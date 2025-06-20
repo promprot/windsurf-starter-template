@@ -1,5 +1,12 @@
 # Development Guide
 
+*Version: 1.0.0*  
+*Last Updated: 2025-06-20*  
+*Maintainer: Red Team*
+
+## Overview
+This guide provides comprehensive instructions for setting up a development environment, understanding the project structure, and contributing to the Windsurf Agent Starter Template.
+
 ## Getting Started
 
 ### Prerequisites
@@ -97,6 +104,23 @@ We use the following tools to maintain code quality:
 - **isort** for import sorting
 - **flake8** for linting
 - **mypy** for type checking
+
+## Changelog
+
+### [1.0.0] - 2025-06-20
+#### Added
+- Initial development guide
+- Setup instructions
+- Project structure overview
+- Tool creation guide
+- Testing procedures
+- Code style guidelines
+
+#### Changed
+- Updated to follow new documentation standards
+
+#### Removed
+- N/A
 
 To format and check your code:
 

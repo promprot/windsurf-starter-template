@@ -1,5 +1,29 @@
 # Deployment Guide
 
+*Version: 1.0.0*  
+*Last Updated: 2025-06-20*  
+*Maintainer: Red Team*
+
+## Overview
+This guide provides comprehensive instructions for deploying the Windsurf Agent Starter Template in various environments, including local development, Docker, and Kubernetes. For more information, see the [official documentation](https://docs.windsurf.com).
+
+## Changelog
+
+### [1.0.0] - 2025-06-20
+#### Added
+- Initial deployment guide
+- Local deployment instructions
+- Docker deployment guide
+- Kubernetes deployment guide
+- Environment variables reference
+- Monitoring information
+
+#### Changed
+- Updated to follow new documentation standards
+
+#### Removed
+- N/A
+
 ## Prerequisites
 
 - Python 3.9+

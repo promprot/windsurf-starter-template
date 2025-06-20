@@ -2,26 +2,36 @@
   "mcpServers": {
     "memory": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "args": ["-y", "@modelcontextprotocol/server-memory@latest"],
       "env": {
-        "MEMORY_FILE_PATH": "./.windsurf/memory.json"
+        "MEMORY_FILE_PATH": "./.windsurf/memory.json",
+        "MEMORY_MAX_ENTRIES": "1000",
+        "LOG_LEVEL": "info"
       }
     },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@latest", "."]
     },
     "github": {
       "command": "docker",
       "args": [
         "run", "-i", "--rm",
         "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
+        "--network", "host",
+        "ghcr.io/github/github-mcp-server:latest"
       ]
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@latest"]
     }
+  },
+  "settings": {
+    "logLevel": "info",
+    "enableMetrics": true,
+    "metricsPort": 9090,
+    "enableHealthCheck": true,
+    "healthCheckPath": "/health"
   }
 }

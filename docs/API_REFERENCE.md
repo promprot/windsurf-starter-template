@@ -1,5 +1,12 @@
 # API Reference
 
+*Version: 1.0.0*  
+*Last Updated: 2025-06-20*  
+*Maintainer: Red Team*
+
+## Overview
+This document provides a comprehensive reference for the Windsurf Agent Starter Template's API, including core components, tool interfaces, and MCP server integration.
+
 ## Core Agent
 
 ### `Agent` Class
@@ -69,4 +76,20 @@ class MCPServer:
     async def stop(self):
         """Stop the MCP server."""
         pass
+
+## Changelog
+
+### [1.0.0] - 2025-06-20
+#### Added
+- Initial API reference documentation
+- Core Agent class reference
+- Tool interface specification
+- Memory interface documentation
+- MCP server interface
+
+#### Changed
+- Updated to follow new documentation standards
+
+#### Removed
+- N/A
 ```
