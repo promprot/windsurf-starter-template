@@ -8,22 +8,18 @@ on:
   schedule:
     # Weekly security updates check (Sunday at midnight)
     - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Skip test execution'
+        required: false
+        default: false
+        type: boolean
 
 # Default environment variables
 env:
   PYTHON_VERSION: '3.9'
   SECURITY_SCAN_FAIL_ON_ISSUES: 'true'
-  SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
-
-# Allow manual workflow triggers with inputs
-# Example: `workflow_dispatch: { inputs: { skip_tests: true } }`
-workflow_dispatch:
-  inputs:
-    skip_tests:
-      description: 'Skip test execution'
-      required: false
-      default: 'false'
-      type: boolean
 
 # Job to cancel previous runs when new commits are pushed
 concurrency:
@@ -69,16 +65,17 @@ jobs:
         mypy .
     
     - name: Run tests with pytest
-      if: ${{ !contains(github.event.inputs.skip_tests, 'true') }}
+      if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs && github.event.inputs.skip_tests == 'true') }}
       run: |
         pip install pytest pytest-cov pytest-asyncio pytest-mock
         pytest --cov=src --cov-report=xml --cov-report=term-missing tests/
     
     - name: Upload coverage to Codecov
-      if: ${{ !contains(github.event.inputs.skip_tests, 'true') }}
+      if: github.event_name != 'workflow_dispatch' || !github.event.inputs || github.event.inputs.skip_tests != 'true'
       uses: codecov/codecov-action@v3
+      continue-on-error: true
       with:
-        token: ${{ secrets.CODECOV_TOKEN || 'dummy_token' }}
+        token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
@@ -88,9 +85,10 @@ jobs:
     name: Security Scan
     runs-on: ubuntu-latest
     needs: test  # Run after tests pass
-    
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0  # Needed for TruffleHog to scan commit history
     

@@ -11,10 +11,6 @@ import pytest_asyncio
 from aiohttp import web, test_utils
 from aiohttp.test_utils import TestClient, TestServer
 
-# Add the project root to the Python path
-project_root = Path(__file__).parent
-sys.path.insert(0, str(project_root))
-
 # Configure logging for tests
 if os.getenv("DEBUG_TESTS"):
     import logging

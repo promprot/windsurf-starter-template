@@ -2,7 +2,7 @@
 
 *Version: 1.0.0*  
 *Last Updated: 2025-06-20*  
-*Maintainer: Windsurf Team*
+*Maintainer: Prometheus*
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -299,13 +299,6 @@ spec:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- [Pydantic](https://pydantic-docs.helpmanual.io/) for awesome data validation
-- [aiohttp](https://docs.aiohttp.org/) for async HTTP server
-- [pytest](https://docs.pytest.org/) for testing
-- [GitHub Actions](https://github.com/features/actions) for CI/CD
-
 ## 🚀 Running the Agent
 
 Start the agent in interactive mode:
@@ -332,6 +325,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [Windsurf](https://windsurf.com) for the amazing framework
+- [Pydantic](https://pydantic-docs.helpmanual.io/) for awesome data validation
+- [aiohttp](https://docs.aiohttp.org/) for async HTTP server
+- [pytest](https://docs.pytest.org/) for testing
+- [GitHub Actions](https://github.com/features/actions) for CI/CD
 - All contributors who have helped improve this template
 
 ## Changelog
