@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "A template for creating Windsurf agents"
 readme = "README.md"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Prometheus Team"},
 ]
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -23,10 +23,12 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-    "pydantic>=1.10.0",
-    "python-dotenv>=0.21.0",
-    "aiohttp>=3.8.0",
-    "typing-extensions>=4.0.0",
+    "pydantic==2.6.4",
+    "python-dotenv==1.0.1",
+    "aiohttp==3.9.3",
+    "typing-extensions==4.11.0",
+    "requests==2.31.0",
+    "PyYAML==6.0.1",
 ]
 
 [project.optional-dependencies]
@@ -48,8 +50,9 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-org/windsurf-starter-template"
-"Bug Tracker" = "https://github.com/your-org/windsurf-starter-template/issues"
+Homepage = "https://github.com/promprot/windsurf-starter-template"
+"Bug Tracker" = "https://github.com/promprot/windsurf-starter-template/issues"
+"Source Code" = "https://github.com/promprot/windsurf-starter-template"
 
 [tool.black]
 line-length = 88

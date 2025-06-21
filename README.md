@@ -9,8 +9,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Security: Bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-[![Tests](https://github.com/your-org/windsurf-starter-template/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/windsurf-starter-template/actions)
-[![codecov](https://codecov.io/gh/your-org/windsurf-starter-template/branch/main/graph/badge.svg?token=YOUR-TOKEN)](https://codecov.io/gh/your-org/windsurf-starter-template)
+[![Tests](https://github.com/promprot/windsurf-starter-template/actions/workflows/ci.yml/badge.svg)](https://github.com/promprot/windsurf-starter-template/actions)
+[![codecov](https://codecov.io/gh/promprot/windsurf-starter-template/branch/main/graph/badge.svg?token=YOUR-TOKEN)](https://codecov.io/gh/promprot/windsurf-starter-template)
 
 A production-ready template for creating AI agents with the Windsurf framework. This template includes everything you need to build, test, secure, and deploy a robust AI agent with tools, memory, and MCP server integration.
 
@@ -48,7 +48,7 @@ A production-ready template for creating AI agents with the Windsurf framework. 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-org/windsurf-starter-template.git
+   git clone https://github.com/promprot/windsurf-starter-template.git
    cd windsurf-starter-template
    ```
 

@@ -8,7 +8,10 @@ from unittest.mock import patch, MagicMock
 from src.tools.example_tool import ExampleTool
 
 # Test data
-TEST_CONFIG = {"test_config": "value"}
+TEST_CONFIG = {
+    "default_name": "Test User",
+    "max_add_value": 1000.0
+}
 
 @pytest.fixture
 def example_tool():
@@ -20,11 +23,13 @@ async def test_example_tool_initialization(example_tool):
     """Test that the tool initializes with the correct configuration."""
     assert example_tool.name == "example_tool"
     assert example_tool.description == "An example tool that demonstrates tool functionality"
-    assert example_tool.config == TEST_CONFIG
+    # Check individual attributes of the config instead of direct comparison
+    assert example_tool.config.default_name == TEST_CONFIG["default_name"]
+    assert example_tool.config.max_add_value == TEST_CONFIG["max_add_value"]
 
 @pytest.mark.parametrize("operation,params,expected_result", [
     ("greet", {"name": "Test"}, "Hello, Test!"),
-    ("greet", {}, "Hello, World!"),
+    ("greet", {}, f"Hello, {TEST_CONFIG['default_name']}!"),
     ("add", {"a": 2, "b": 3}, 5),
     ("add", {"a": -1, "b": 1}, 0),
 ])

@@ -1,15 +1,23 @@
-# Deployment Guide
+# 🚀 Deployment Guide
 
 *Version: 1.0.0*  
-*Last Updated: 2025-06-20*  
-*Maintainer: Red Team*
+*Last Updated: 2025-06-21*  
+*Maintainer: Prometheus Team*
 
-## Overview
+## 📋 Overview
 This guide provides comprehensive instructions for deploying the Windsurf Agent Starter Template in various environments, including local development, Docker, and Kubernetes. For more information, see the [official documentation](https://docs.windsurf.com).
 
-## Changelog
+## 🛠 Prerequisites
 
-### [1.0.0] - 2025-06-20
+- Python 3.9+
+- pip (Python package manager)
+- Git
+- (Optional) Docker and Docker Compose for containerized deployments
+- (Optional) kubectl for Kubernetes deployments
+
+## 📝 Changelog
+
+### [1.0.0] - 2025-06-21
 #### Added
 - Initial deployment guide
 - Local deployment instructions
@@ -17,21 +25,20 @@ This guide provides comprehensive instructions for deploying the Windsurf Agent 
 - Kubernetes deployment guide
 - Environment variables reference
 - Monitoring information
+- Troubleshooting section
+- Next steps guide
 
 #### Changed
-- Updated to follow new documentation standards
+- Updated maintainer to Prometheus Team
+- Improved document structure
+- Added emoji icons for better readability
+- Enhanced deployment instructions
+- Standardized code examples
 
 #### Removed
 - N/A
 
-## Prerequisites
-
-- Python 3.9+
-- pip (Python package manager)
-- Git
-- (Optional) Docker and Docker Compose
-
-## Local Deployment
+## 🖥️ Local Deployment
 
 ### 1. Clone the Repository
 
@@ -75,7 +82,7 @@ cp .env.example .env
 python -m src.main
 ```
 
-## Docker Deployment
+## 🐳 Docker Deployment
 
 ### 1. Build the Docker Image
 
@@ -92,7 +99,7 @@ docker run -d --name windsurf-agent \
   windsurf-agent
 ```
 
-## Kubernetes Deployment
+## ☸️ Kubernetes Deployment
 
 ### 1. Create a Kubernetes Secret
 
@@ -107,7 +114,7 @@ kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
 
-## Environment Variables
+## 🔧 Environment Variables
 
 | Variable | Description | Required | Default |
 |----------|-------------|----------|---------|
@@ -117,18 +124,18 @@ kubectl apply -f k8s/service.yaml
 | `AUTH_REQUIRED` | Require authentication | No | `true` |
 | `API_KEY` | API key for authentication | If `AUTH_REQUIRED=true` | - |
 
-## Monitoring
+## 📊 Monitoring
 
 The agent exposes the following endpoints for monitoring:
 
 - `GET /health` - Health check
 - `GET /metrics` - Prometheus metrics
 
-## Logging
+## 📝 Logging
 
 Logs are written to `stdout` in JSON format. You can configure the log level using the `LOG_LEVEL` environment variable.
 
-## Backup and Recovery
+## 💾 Backup and Recovery
 
 ### Backing Up Memory
 
@@ -146,7 +153,7 @@ To restore from a backup:
 cp memory_backup_20230620.json .windsurf/memory.json
 ```
 
-## Upgrading
+## 🔄 Upgrading
 
 1. Pull the latest changes:
    ```bash
