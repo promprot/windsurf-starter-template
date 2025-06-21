@@ -70,13 +70,11 @@ jobs:
         pip install pytest pytest-cov pytest-asyncio pytest-mock
         pytest --cov=src --cov-report=xml --cov-report=term-missing tests/
     
-    - name: Set up Codecov environment
+    - name: Check for Codecov token
       if: github.event_name != 'workflow_dispatch' || !github.event.inputs || github.event.inputs.skip_tests != 'true'
-      id: codecov_setup
-      env:
-        HAS_CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN != '' }}
+      id: check_codecov
       run: |
-        if [ "$HAS_CODECOV_TOKEN" = "true" ]; then
+        if [ -n "${{ secrets.CODECOV_TOKEN }}" ]; then
           echo "token_available=true" >> $GITHUB_OUTPUT
         else
           echo "token_available=false" >> $GITHUB_OUTPUT
@@ -84,12 +82,11 @@ jobs:
         fi
     
     - name: Upload coverage to Codecov
-      if: steps.codecov_setup.outputs.token_available == 'true' && (github.event_name != 'workflow_dispatch' || !github.event.inputs || github.event.inputs.skip_tests != 'true')
+      if: steps.check_codecov.outputs.token_available == 'true'
       uses: codecov/codecov-action@v3
       continue-on-error: true
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
@@ -116,32 +113,28 @@ jobs:
         python -m pip install --upgrade pip
         pip install safety bandit trufflehog
     
-    - name: Set up Safety environment
-      id: safety_setup
-      env:
-        HAS_SAFETY_KEY: ${{ secrets.SAFETY_API_KEY != '' }}
+    - name: Check for Safety API key
+      id: check_safety
       run: |
-        if [ "$HAS_SAFETY_KEY" = "true" ]; then
+        if [ -n "${{ secrets.SAFETY_API_KEY }}" ]; then
           echo "key_available=true" >> $GITHUB_OUTPUT
+          echo "Using authenticated Safety check"
+          safety check --key="${{ secrets.SAFETY_API_KEY }}" --full-report --output text || \
+            if [ "${{ env.SECURITY_SCAN_FAIL_ON_ISSUES }}" = "true" ]; then
+              exit 1
+            else
+              exit 0
+            fi
         else
           echo "key_available=false" >> $GITHUB_OUTPUT
+          echo "SAFETY_API_KEY not set, running in basic mode (limited to local vulnerability database)"
+          safety check --ignore=51457 || \
+            if [ "${{ env.SECURITY_SCAN_FAIL_ON_ISSUES }}" = "true" ]; then
+              exit 1
+            else
+              exit 0
+            fi
         fi
-
-    - name: Check for Python vulnerabilities with Safety (authenticated)
-      if: steps.safety_setup.outputs.key_available == 'true'
-      continue-on-error: ${{ env.SECURITY_SCAN_FAIL_ON_ISSUES != 'true' }}
-      env:
-        SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
-      run: |
-        echo "Using authenticated Safety check"
-        safety check --key="$SAFETY_API_KEY" --full-report --output text
-
-    - name: Check for Python vulnerabilities with Safety (basic)
-      if: steps.safety_setup.outputs.key_available != 'true' && steps.safety_setup.outputs.key_available != ''
-      continue-on-error: ${{ env.SECURITY_SCAN_FAIL_ON_ISSUES != 'true' }}
-      run: |
-        echo "SAFETY_API_KEY not set, running in basic mode (limited to local vulnerability database)"
-        safety check --ignore=51457  # Ignore known false positives
     
     - name: Run Bandit security linter
       continue-on-error: ${{ env.SECURITY_SCAN_FAIL_ON_ISSUES != 'true' }}
